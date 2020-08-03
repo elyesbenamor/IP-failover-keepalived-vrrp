@@ -33,6 +33,6 @@ vrrp_instance VI_1 {
         chk_haproxy
         chk_node
     }
-    notify_master /etc/keepalived/master.sh
+    notify_master /etc/keepalived/nodeovh.js
 }
 EOF
