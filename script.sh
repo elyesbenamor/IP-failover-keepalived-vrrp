@@ -6,6 +6,7 @@ sudo tar xvzf keepalived-2.0.15.tar.gz
 cd keepalived-2.0.15
 sudo ./configure --prefix=/usr/local
 sudo make && sudo make install
+
 echo "[TASK 2] start keepalived service"
 #copy the default config in case we want tio use it 
 cp \
@@ -24,12 +25,11 @@ sudo cat >>/etc/systemd/network/50-default.networkf<<EOF
 [Network]
 Address={FLOATING_IP}/32
 EOF
+
 echo "[TASK 4] restart service"
 sudo systemctl restart systemd-networkd
 
-
 echo "[TASK 5] add configuration"
-
 sudo cat >>/etc/keepalived/keepalived.conf<<EOF
 global_defs {
     enable_script_security
