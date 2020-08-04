@@ -1,10 +1,6 @@
 # Npm dependencies
 /node_modules
 
-# IDE
-.vscode
-.idea
-*.iml
 
 # Dotenv
 .env
