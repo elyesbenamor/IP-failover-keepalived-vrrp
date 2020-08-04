@@ -56,7 +56,7 @@ vrrp_instance VI_1 {
     }
     track_script {
         chk_haproxy
-        chk_node
+       
     }
     notify_master /etc/keepalived/ovh-api.js
 }
