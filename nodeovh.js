@@ -7,20 +7,23 @@ const ovh = require('ovh')({
   appSecret: process.env.OVH_API_AS,
   consumerKey: process.env.OVH_API_CK,
 });
-async function Server(){
-    const available = await ovh.request('GET','/dedicated/server/availabilities',{
-        country : EU,
+
+ovh.request('GET','/dedicated/server/availabilities',{
+        country : 'EU',
         hardware : ''
-    }, function(err, valid){
-        if (valid){
-            return resolve(JSON.parse(body.valid));
-        }
-        else {
-            return err;
-        }
-    });
-    return resolve(JSON.parse(body.available));
-};
+        }, function(err, valids){
+            if (err) { throw err; }
+            valids.forEach(element => {
+                
+               element["datacenters"].forEach(element => {
+                   if (element["availability"] != "unavailable")
+                   return console.log(element["datacenter"]);
+               });
+               
+            });
+        });
+       
+/*
 
 (async()=> {
     try {
@@ -31,7 +34,7 @@ async function Server(){
           do {
               getip =await ovh.request('POST', '/ip/{ip}/move',{ip: 'floatingip'},{
                   nexthop: null,
-                  to: server()
+                  to: available
               }, function(err){
                   return err;
               });
@@ -43,3 +46,4 @@ async function Server(){
 })
 
 
+//return resolve(JSON.parse(body.available));*/
