@@ -40,11 +40,7 @@ vrrp_script chk_haproxy {
     interval 2
     weight 2
 }
-vrrp_script chk_node {
-    script ""
-    interval 2
-    weight 2
-}
+
 vrrp_instance VI_1 {
     interface x
     state MASTER
@@ -62,6 +58,6 @@ vrrp_instance VI_1 {
         chk_haproxy
         chk_node
     }
-    notify_master /etc/keepalived/nodeovh.js
+    notify_master /etc/keepalived/ovh-api.js
 }
 EOF
