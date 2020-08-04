@@ -24,14 +24,13 @@ const main = async () => {
 
             console.log(datacenternames)
             var item = datacenternames[(Math.random() * datacenternames.length) | 0];
-         
             ovh.request('GET', '/ip/{ip}',{ ip: 'floatingip' },function (err, ip) {
                 console.log(JSON.stringify(err))
                 if (err) return;
                 do {     
                     ovh.request('POST', '/ip/{ip}/move', { ip: 'floatingip' }, {
                         nexthop: null,
-                        to: item 
+                        to: `${item}` 
                     }, function (err) {
                         return err;
                     });
