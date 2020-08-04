@@ -11,7 +11,7 @@ const Datacenternames = [];
 
 const main = async ()=> {
     try{
-
+//      ygeti les serveur available fi zone EU w ba3d y7othom fi lista 
         ovh.request('GET','/dedicated/server/availabilities',{
             country : 'EU',
             hardware : ''
@@ -33,12 +33,12 @@ const main = async ()=> {
                     //get random element
                     var item = Datacenternames[(Math.random()*Datacenternames.length)|0];
                     //console.log(item);
-                    //fetching ip and assign to available server
-                    let getip = await ovh.request('GET', '/ip/{ip}',{ip: 'floatingip'}, function (err, ip) {
+                    //ytesti itheken floating ip mawjouda 3al serveur ama ma na3rech ech traja3 get hethi 
+                    const getip = await ovh.request('GET', '/ip/{ip}',{ip: 'floatingip'}, function (err, ip) {
                     console.log(err || ip);
                     
                          });
-                     do {
+                     do {      // itheken ip mouch mawjouda 3al serveur ymigriha l ay serveur available mi lis item
                              ovh.request('POST', '/ip/{ip}/move',{ip: 'floatingip'},{
                                 nexthop: null,
                                 to: item //one of dedicated servers
