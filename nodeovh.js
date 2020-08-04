@@ -1,19 +1,16 @@
-var async = require('async');
-var ovh = require('ovh')({
-    endpoint: 'ovh-eu',
-    appKey: APP_KEY,
-    appSecret: APP_SECRET,
-    consumerKey: APP_CONSUMER_KEY
-  });
-ovh.request('GET','/ip/{ip}',{ ip: '' } ,function(err, ip){
-    if (err) { throw err; }
-    else {
-        const FIP = ip;
-        console.log("the server ip is ", ip);
-        ovh.request('POST','/ip/{ip}/move',{ip:FIP}, function(){
+const request = require('request');
 
+require('dotenv').config();
 
-
-        })
-    }
+const ovh = require('ovh')({
+  endpoint: process.env.OVH_API_ENDPOINT,
+  appKey: process.env.OVH_API_AK,
+  appSecret: process.env.OVH_API_AS,
+  consumerKey: process.env.OVH_API_CK,
 });
+
+ovh.request('GET', '/xdsl', function (err, ip) {
+    console.log(err || ip)
+  });
+
+ 
